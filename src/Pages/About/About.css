@@ -34,9 +34,7 @@
   border-radius: 5%;
   color: white;
   font-weight: 700;
-}
-.link-button {
-  margin-top: 50px;
+  border: none;
 }
 .explore {
   font-size: small;
