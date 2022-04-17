@@ -1,5 +1,5 @@
 .service-container{
-    border: 3px solid aqua;
+    border: 3px solid rgba(0, 255, 255, 0.176);
     border-radius: 10px;
     padding-bottom: 10px;
     text-align: center;
@@ -9,8 +9,13 @@
     width: 100%;
 }
 
-@media screen and(max-width: 576px){
-    .service-container{
-        grid-template-columns:(1, 1fr);
-    }
+.button{
+        text-decoration: none;
+        background-image: linear-gradient(orange, tomato);
+        padding: 5px 20px;
+        border-radius: 5%;
+        color: white;
+        font-weight: 700;
+        border: none;
 }
+

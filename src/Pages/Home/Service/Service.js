@@ -5,17 +5,13 @@ import './Service.css'
 const Service = ({service}) => {
     const{name, img, price,description} = service
 
-    // const navigate = useNavigate();
-    // const navigateToServiceDetails = id =>{
-    //     navigate(`/service/${id}`)
-    // }
     return (
-        <div className='service-container'>
+        <div className='service-container shadow-lg p-3 mb-5 bg-white rounded'>
         <img src={img} alt="" />
         <h2>{name}</h2>
         <p>Price: {price}$</p>
         <h6>Description: {description}</h6>
-        <Link to={'/checkout'}><button>checkout</button></Link>
+        <Link to={'/checkout'}><button className='button'>checkout</button></Link>
     </div>
     );
 };
