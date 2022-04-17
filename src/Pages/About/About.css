@@ -1,0 +1,44 @@
+.header-style {
+  border-left: 5px solid;
+  padding-left: 20px;
+  font-size: 60px;
+  border-image: linear-gradient(blue, cyan);
+  border-image-slice: 1;
+  margin-right: 20px;
+}
+.first-section {
+  display: flex;
+  gap: 40px;
+}
+.first-section img {
+  margin-right: 50px;
+  width: 50%;
+  margin-top: 30px;
+}
+.first-section .part1 {
+  margin-left: 250px;
+  padding-top: 50px;
+  width: 40%;
+  size: 40%;
+}
+#paragraph {
+  font-size: 20px;
+}
+.Developer {
+  color: orange;
+}
+.link-button {
+  text-decoration: none;
+  background-image: linear-gradient(orange, tomato);
+  padding: 5px 20px;
+  border-radius: 5%;
+  color: white;
+  font-weight: 700;
+}
+.link-button {
+  margin-top: 50px;
+}
+.explore {
+  font-size: small;
+  margin-top: 50px;
+}

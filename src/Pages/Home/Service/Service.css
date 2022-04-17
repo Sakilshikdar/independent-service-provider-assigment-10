@@ -1,0 +1,16 @@
+.service-container{
+    border: 3px solid aqua;
+    border-radius: 10px;
+    padding-bottom: 10px;
+    text-align: center;
+}
+.service-container img{
+    border-radius: 5px;
+    width: 100%;
+}
+
+@media screen and(max-width: 576px){
+    .service-container{
+        grid-template-columns:(1, 1fr);
+    }
+}
