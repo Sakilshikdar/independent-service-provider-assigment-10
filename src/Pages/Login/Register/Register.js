@@ -7,6 +7,7 @@ import Social from "../../Hooks/Social";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { sendEmailVerification } from "firebase/auth";
+import Loading from '../../Shared/Loading/Loading';
 
 const Register = () => {
   const [createUserWithEmailAndPassword, user, loading] =
@@ -22,11 +23,11 @@ const Register = () => {
   };
 
   if (loading) {
-    return <h1 className="text-center mt-5">Loading...</h1>;
+    return <Loading></Loading>
   }
 
   const verificationEmail = () =>{
-    console.log(auth)
+    console.log(auth.currentUser)
     sendEmailVerification(auth.currentUser)
     .then(()=>{
       alert('Email sent')
