@@ -18,7 +18,7 @@ const Social = () => {
       }
 
       if(user){
-          navigate('/home')
+          navigate('/checkout')
       }
 
     if (loading) {
@@ -36,7 +36,7 @@ const Social = () => {
             <button onClick={() =>signInWithGoogle()}
              className='w-50 d-block mx-auto bg-primary my-2'>
             <img style={{ width: '25px' }} src={logo1} alt="" />
-                <span className='px-2'>Google Sign In</span>
+                <span className='px-2 text-white'>Google Sign In</span>
             </button>
         </div>
     );

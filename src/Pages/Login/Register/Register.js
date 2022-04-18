@@ -4,19 +4,22 @@ import { useNavigate } from "react-router-dom";
 import auth from "../../../firebase.init";
 import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
 import Social from "../../Hooks/Social";
-import { ToastContainer, toast } from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { sendEmailVerification } from "firebase/auth";
 import Loading from '../../Shared/Loading/Loading';
 
 const Register = () => {
-  const [createUserWithEmailAndPassword, user, loading] =
-    useCreateUserWithEmailAndPassword(auth);
+  const [createUserWithEmailAndPassword, user, loading, error] =
+    useCreateUserWithEmailAndPassword(auth, {sendEmailVerification: true});
   const navigate = useNavigate();
   if (user) {
     navigate("/login");
+
   }
 
+  if(error){
+    toast('Verification Email Sent')
+  }
 
   const handleLogin = () => {
     navigate("/login");
@@ -26,23 +29,11 @@ const Register = () => {
     return <Loading></Loading>
   }
 
-  const verificationEmail = () =>{
-    console.log(auth.currentUser)
-    sendEmailVerification(auth.currentUser)
-    .then(()=>{
-      alert('Email sent')
-    })
-  }
-  
-
-
   const handleRegister = (event) => {
     event.preventDefault();
-    // const name = event.target.name.value;
     const email = event.target.email.value;
     const password = event.target.password.value;
       createUserWithEmailAndPassword(email, password);
-      verificationEmail();
   };
 
   return (
@@ -79,7 +70,7 @@ const Register = () => {
               style={{ cursor: "pointer" }}
               className="text-danger "
               onClick={handleLogin}
-            >
+              >
               Please Login
             </span>
           </div>
