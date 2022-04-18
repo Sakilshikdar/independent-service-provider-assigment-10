@@ -1,77 +1,93 @@
-import React, { useState } from 'react';
-import './Register.css'
-import loginIcon from '../../../images/icon/login.ico'
-import { useNavigate } from 'react-router-dom';
-import auth from '../../../firebase.init';
-import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
-import Social from '../../Hooks/Social';
-import { sendEmailVerification } from 'firebase/auth';
+import "./Register.css";
+import loginIcon from "../../../images/icon/login.ico";
+import { useNavigate } from "react-router-dom";
+import auth from "../../../firebase.init";
+import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
+import Social from "../../Hooks/Social";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { sendEmailVerification } from "firebase/auth";
 
 const Register = () => {
-    const [
-        createUserWithEmailAndPassword,
-        user,
-        loading,
-        error,
-    ] = useCreateUserWithEmailAndPassword(auth);
-    const navigate = useNavigate();
-    if (user) {
-        navigate('/login')
-    }
-
-    const [agree, setAgree] = useState(false);
-
-    const handleLogin = () => {
-        navigate('/login')
-    }
+  const [createUserWithEmailAndPassword, user, loading] =
+    useCreateUserWithEmailAndPassword(auth);
+  const navigate = useNavigate();
+  if (user) {
+    navigate("/login");
+  }
 
 
-    if (loading) {
-        return <h1 className='text-center mt-5'>Loading...</h1>;
-    }
+  const handleLogin = () => {
+    navigate("/login");
+  };
+
+  if (loading) {
+    return <h1 className="text-center mt-5">Loading...</h1>;
+  }
+
+  const verificationEmail = () =>{
+    console.log(auth)
+    sendEmailVerification(auth.currentUser)
+    .then(()=>{
+      alert('Email sent')
+    })
+  }
+  
 
 
+  const handleRegister = (event) => {
+    event.preventDefault();
+    // const name = event.target.name.value;
+    const email = event.target.email.value;
+    const password = event.target.password.value;
+      createUserWithEmailAndPassword(email, password);
+      verificationEmail();
+  };
 
-    const verificationEmail = () => {
-     sendEmailVerification(auth.currentUser)
-            .then(() => {
-                alert('Email sent')
-            })
-        }
+  return (
+    <div>
+      <h2 style={{ textAlign: "center", marginTop: "5px" }}>Please Register</h2>
+      <form onSubmit={handleRegister} className="form">
+        <input type="text" name="name" id="" placeholder="Your name" />
+        <input
+          type="email"
+          name="email"
+          id=""
+          placeholder="Email-Address"
+          required
+        />
+        <input
+          type="password"
+          name="password"
+          id=""
+          placeholder="Password"
+          required
+        />
+        <input
+          className="btn btn-primary mx-auto w-50 mt-2"
+          type="submit"
+          value="Register"
+        />
+        <div className=" d-flex  align-items-center ">
+          <div>
+            <img className="mx-1" height={25} src={loginIcon} alt="" />
+          </div>
+          <div className="register">
+            Already have an Account?
+            <span
+              style={{ cursor: "pointer" }}
+              className="text-danger "
+              onClick={handleLogin}
+            >
+              Please Login
+            </span>
+          </div>
+        </div>
+        <Social></Social>
+      </form>
+      <ToastContainer />
+    </div>
+  );
+};
 
-        const handleRegister = event => {
-            event.preventDefault();
-            const name = event.target.name.value;
-            const email = event.target.email.value;
-            const password = event.target.password.value;
-            if (agree) {
-                createUserWithEmailAndPassword(email, password);
-                verificationEmail()
-            }
-        }
-
-
-        return (
-            <div>
-                <h2 style={{ textAlign: 'center', marginTop: '5px' }}>Please Register</h2>
-                <form onSubmit={handleRegister} className='form'>
-                    <input type="text" name="name" id="" placeholder='Your name' />
-                    <input type="email" name="email" id="" placeholder='Email-Address' required />
-                    <input type="password" name="password" id="" placeholder='Password' required />
-                    <div className=' d-flex  align-items-center '>
-                        <div>
-                            <img className='mx-1' height={25} src={loginIcon} alt="" />
-                        </div>
-                        <div className='register'>
-                            Already have an Account?
-                            <span style={{ cursor: "pointer" }} className='text-danger ' onClick={handleLogin}>Please Login</span>
-
-                        </div>
-                    </div>
-                    <Social></Social>
-                </form>
-            </div>
-        );
-    };
-
-    export default Register;
+export default Register;

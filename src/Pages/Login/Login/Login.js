@@ -6,13 +6,15 @@ import newIcon from '../../../images/add-user.ico'
 import { useSendPasswordResetEmail, useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import auth from '../../../firebase.init';
 import Social from '../../Hooks/Social';
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Login = () => {
     const emailRef = useRef('');
     const passwordRef = useRef('');
     const navigate = useNavigate();
     const location = useLocation();
+   
 
     let from = location.state?.from?.pathname || "/";
 
@@ -43,8 +45,13 @@ const Login = () => {
 
     const resetPassword = async () => {
         const email = emailRef.current.value;
-        await sendPasswordResetEmail(email);
-        alert('Sent email');
+        if(email){
+            await sendPasswordResetEmail(email);
+        toast('Sent email');
+        }
+        else{
+            toast('Enter your Email Address')
+        }
     }
 
     return (
@@ -53,12 +60,12 @@ const Login = () => {
             <Form onSubmit={handleSubmit}>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Label>Email address</Form.Label>
-                    <Form.Control ref={emailRef} type="email" placeholder="Enter email" />
+                    <Form.Control ref={emailRef} type="email" placeholder="Enter email" required/>
                 </Form.Group>
 
                 <Form.Group className="mb-3" controlId="formBasicPassword">
                     <Form.Label>Password</Form.Label>
-                    <Form.Control ref={passwordRef} type="password" placeholder="Password" />
+                    <Form.Control ref={passwordRef} type="password" placeholder="Password" required/>
                 </Form.Group>
                 <Button className='d-block mx-auto w-50 mb-2' variant="primary" type="submit">
                     Login
@@ -78,6 +85,7 @@ const Login = () => {
                 </div>
                 <Social></Social>
             </Form>
+            <ToastContainer />
         </div>
     );
 };

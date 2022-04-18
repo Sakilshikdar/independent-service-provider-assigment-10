@@ -6,7 +6,7 @@ import logo from '../../../images/icon/camera.ico'
 import { signOut } from 'firebase/auth';
 import auth from '../../../firebase.init';
 import { useAuthState } from 'react-firebase-hooks/auth';
-// import './Header.css'
+
 
 const Header = () => {
     const [user] = useAuthState(auth);
@@ -16,7 +16,7 @@ const Header = () => {
     }
     return (
         <div>
-             <Navbar style={{backgroundColor: 'rgba(51, 20, 207, 0.853)'}} collapseOnSelect expand="lg" sticky='top' variant="dark">
+             <Navbar style={{backgroundColor: 'rgba(0, 255, 255, 0.195)'}} collapseOnSelect expand="lg" sticky='top' >
             <Container>
                 <Navbar.Brand as={Link} to="/"><img className='mr-0' height={30} src={logo} alt="" /></Navbar.Brand>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
