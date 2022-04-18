@@ -18,10 +18,11 @@ const Header = () => {
         <div>
              <Navbar style={{backgroundColor: 'rgba(0, 255, 255, 0.195)'}} collapseOnSelect expand="lg" sticky='top' >
             <Container>
-                <Navbar.Brand as={Link} to="/"><img className='mr-0' height={30} src={logo} alt="" /></Navbar.Brand>
+                <Navbar.Brand as={Link} to="/"><img className='mr-0 mb-1' height={30} src={logo} alt="" /></Navbar.Brand>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="me-auto">
+                        <h4 style={{marginTop:'4px'}}>Photographer</h4>
                         <Nav.Link href="home">Home</Nav.Link>
                         <Nav.Link href="home#services">Services</Nav.Link>
                         <Nav.Link as={Link} to='/blogs'>Blogs</Nav.Link>

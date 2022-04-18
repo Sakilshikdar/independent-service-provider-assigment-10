@@ -2,7 +2,7 @@ import "./Register.css";
 import loginIcon from "../../../images/icon/login.ico";
 import { useNavigate } from "react-router-dom";
 import auth from "../../../firebase.init";
-import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
+import { useCreateUserWithEmailAndPassword, useSendEmailVerification} from "react-firebase-hooks/auth";
 import Social from "../../Hooks/Social";
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -10,15 +10,24 @@ import Loading from '../../Shared/Loading/Loading';
 
 const Register = () => {
   const [createUserWithEmailAndPassword, user, loading, error] =
-    useCreateUserWithEmailAndPassword(auth, {sendEmailVerification: true});
+    useCreateUserWithEmailAndPassword(auth);
+    const [sendEmailVerification, sending, error1] = useSendEmailVerification(
+      auth
+    )
   const navigate = useNavigate();
   if (user) {
     navigate("/login");
 
   }
 
+  const handleVerification = async () => {
+    await sendEmailVerification();
+    alert('Sent Verification Email');
+  }
+
+
   if(error){
-    toast('Verification Email Sent')
+   return toast(error)
   }
 
   const handleLogin = () => {
@@ -34,6 +43,7 @@ const Register = () => {
     const email = event.target.email.value;
     const password = event.target.password.value;
       createUserWithEmailAndPassword(email, password);
+      handleVerification()
   };
 
   return (

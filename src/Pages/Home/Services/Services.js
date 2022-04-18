@@ -11,7 +11,7 @@ const Services = () => {
         .then(data => setServices(data))
     },[])
     return (
-        <div>
+        <div className='mb-5'>
             <div id='services'>
                 <h1 className='services-title d-flex justify-content-center  mt-5'>My Service</h1>
                <div className='services-container'>
